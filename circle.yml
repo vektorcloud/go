@@ -14,11 +14,11 @@ dependencies:
 
 test:
   override:
-    - docker run -t --entrypoint /bin/sh quay.io/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:latest -c 'echo'
+    - docker run -t --entrypoint /bin/sh quay.io/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH} -c 'echo'
 
 deployment:
   hub:
-    branch: master
+    branch: /^.*/
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS quay.io
       - docker push quay.io/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}
