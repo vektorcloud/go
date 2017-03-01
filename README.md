@@ -1,3 +1,3 @@
 # go
 
-Alpine-base golang image
+Minimal golang image with [Glide](https://github.com/Masterminds/glide) included

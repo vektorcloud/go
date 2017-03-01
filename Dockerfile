@@ -18,18 +18,15 @@ RUN set -ex && \
                                  openssl \
                                  go && \
     export GOROOT_BOOTSTRAP="$(go env GOROOT)" && \
-    wget -q "$GOLANG_SRC_URL" -O golang.tar.gz && \
+    cd /tmp && wget -q "$GOLANG_SRC_URL" -O golang.tar.gz && \
     echo "$GOLANG_SRC_SHA256  golang.tar.gz" | sha256sum -c - && \
-    tar -C /usr/local -xzf golang.tar.gz && \
-    rm golang.tar.gz && \
-    cd /usr/local/go/src && \
-    ./make.bash && \
-    wget -q "$GLIDE_SRC_URL" -O glide.tar.gz && \
+    tar xzf golang.tar.gz -C /usr/local && \
+    cd /usr/local/go/src && ./make.bash && \
+    cd /tmp && wget -q "$GLIDE_SRC_URL" -O glide.tar.gz && \
     echo "$GLIDE_SRC_SHA256  glide.tar.gz" | sha256sum -c - && \
-    tar -C /tmp -xzf glide.tar.gz && \
-    rm glide.tar.gz && \
-    mv /tmp/linux-amd64/glide /usr/bin/ && \
-    rm -rf /tmp/linux-amd64 && \
+    tar xzf glide.tar.gz && \
+    mv ./linux-amd64/glide /usr/local/bin/ && \
+    rm -rf /tmp/* && \
     apk del .build-deps
 
 ENV GOPATH /go
