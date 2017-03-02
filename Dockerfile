@@ -1,6 +1,6 @@
 FROM quay.io/vektorcloud/base:3.5
 
-RUN apk add --no-cache curl git mercurial bzr make
+RUN apk add --no-cache curl git mercurial bzr make gcc
 
 ENV GLIDE_VERSION v0.12.3
 ENV GLIDE_SRC_URL https://github.com/Masterminds/glide/releases/download/${GLIDE_VERSION}/glide-${GLIDE_VERSION}-linux-amd64.tar.gz
