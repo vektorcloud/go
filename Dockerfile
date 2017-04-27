@@ -9,6 +9,8 @@ ENV GOLANG_SRC_SHA256 406865f587b44be7092f206d73fc1de252600b79b3cacc587b74b5ef5c
 ENV GOPATH /go
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
+# Certain Go packages such as go-sqlite3 depend
+# on libc headers, thus we include musl-dev.
 RUN set -ex && \
     apk add --no-cache --virtual .build-deps \
                                  bash \
@@ -23,6 +25,7 @@ RUN set -ex && \
     cd /usr/local/go/src && ./make.bash && \
     go get github.com/golang/dep/cmd/dep && \
     rm -rf /tmp/* && \
-    apk del .build-deps 
+    apk del .build-deps  && \
+    apk add --no-cache musl-dev
 
 WORKDIR /go
