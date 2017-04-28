@@ -24,6 +24,7 @@ RUN set -ex && \
     tar xzf golang.tar.gz -C /usr/local && \
     cd /usr/local/go/src && ./make.bash && \
     go get github.com/golang/dep/cmd/dep && \
+    go get github.com/jteeuwen/go-bindata/... && \
     rm -rf /tmp/* && \
     apk del .build-deps  && \
     apk add --no-cache musl-dev
