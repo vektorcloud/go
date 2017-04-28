@@ -25,6 +25,7 @@ RUN set -ex && \
     cd /usr/local/go/src && ./make.bash && \
     go get github.com/golang/dep/cmd/dep && \
     go get github.com/jteeuwen/go-bindata/... && \
+    rm -rf /go/src/github.com/ && \
     rm -rf /tmp/* && \
     apk del .build-deps  && \
     apk add --no-cache musl-dev
