@@ -7,7 +7,7 @@ ENV GOLANG_SRC_URL https://golang.org/dl/go${GOLANG_VERSION}.src.tar.gz
 ENV GOLANG_SRC_SHA256 a4ab229028ed167ba1986825751463605264e44868362ca8e7accc8be057e993
 
 ENV GOPATH /go
-ENV PATH $PATH:/usr/local/go/bin
+ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Certain Go packages such as go-sqlite3 depend
 # on libc headers, thus we include musl-dev.
