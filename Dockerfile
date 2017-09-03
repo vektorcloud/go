@@ -1,7 +1,5 @@
 FROM quay.io/vektorcloud/base:3.6
 
-RUN apk add --no-cache curl git mercurial bzr make gcc
-
 ENV GOLANG_VERSION 1.9
 ENV GOLANG_SRC_URL https://golang.org/dl/go${GOLANG_VERSION}.src.tar.gz
 ENV GOLANG_SRC_SHA256 a4ab229028ed167ba1986825751463605264e44868362ca8e7accc8be057e993
@@ -11,11 +9,12 @@ ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Certain Go packages such as go-sqlite3 depend
 # on libc headers, thus we include musl-dev.
+RUN apk add --no-cache curl git mercurial bzr make gcc musl-dev
+
 RUN set -ex && \
     apk add --no-cache --virtual .build-deps \
                                  bash \
                                  gcc \
-                                 musl-dev \
                                  openssl \
                                  go && \
     export GOROOT_BOOTSTRAP="$(go env GOROOT)" && \
@@ -25,8 +24,7 @@ RUN set -ex && \
     cd /usr/local/go/src && ./make.bash && \
     rm -rf /go/src/github.com/ && \
     rm -rf /tmp/* && \
-    apk del .build-deps  && \
-    apk add --no-cache musl-dev
+    apk del .build-deps
 
 ENV DEP_BRANCH v0.3.0
 
