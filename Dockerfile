@@ -26,10 +26,4 @@ RUN set -ex && \
     rm -rf /tmp/* && \
     apk del .build-deps
 
-ENV DEP_BRANCH v0.3.0
-
-RUN mkdir -p /go/src/github.com/golang \
-  && cd /go/src/github.com/golang \
-  && git clone --branch $DEP_BRANCH --depth 1 https://github.com/golang/dep.git \
-  && cd dep/cmd/dep \
-  && go install
+RUN go get -u github.com/golang/dep/cmd/dep
