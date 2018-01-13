@@ -1,4 +1,4 @@
-FROM quay.io/vektorcloud/base:3.6
+FROM quay.io/vektorcloud/base:3.7
 
 ENV GOLANG_VERSION 1.9.2
 ENV GOLANG_SRC_URL https://golang.org/dl/go${GOLANG_VERSION}.src.tar.gz
