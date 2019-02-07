@@ -1,13 +1,9 @@
-# [Go](https://golang.org) with [Dep](https://github.com/golang/dep) on Alpine
+# go
 
 ![circleci][circleci]
 
 [![Docker Repository on Quay](https://quay.io/repository/vektorcloud/go/status "Docker Repository on Quay")](https://quay.io/repository/vektorcloud/go)
 
-## Versions
-
-Go   | Dep   | Alpine
------|-------|---------------
-|1.9 | master | 3.6
+Minimal [Golang](https://golang.org) Docker image built on Alpine
 
 [circleci]: https://img.shields.io/circleci/project/github/vektorcloud/go.svg "go"
