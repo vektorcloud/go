@@ -1,4 +1,4 @@
-FROM quay.io/vektorcloud/base:3.8
+FROM quay.io/vektorcloud/base:3.8 as base
 
 ENV GOLANG_VERSION 1.11.2
 ENV GOLANG_SRC_URL https://golang.org/dl/go${GOLANG_VERSION}.src.tar.gz
@@ -7,8 +7,7 @@ ENV GOLANG_SRC_SHA256 042fba357210816160341f1002440550e952eb12678f7c9e7e9d389437
 ENV GOPATH /go
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
-# Certain Go packages such as go-sqlite3 depend
-# on libc headers, thus we include musl-dev.
+# Include common CVS and Go package deps, including libc headers
 RUN apk add --no-cache curl git mercurial bzr make gcc musl-dev
 
 RUN set -ex && \
@@ -26,4 +25,13 @@ RUN set -ex && \
     rm -rf /tmp/* && \
     apk del .build-deps
 
-RUN go get -u github.com/golang/dep/cmd/dep
+FROM base as onbuild
+
+WORKDIR /app
+ARG CGO_ENABLED=0
+ARG LDFLAGS="-w -s"
+
+ONBUILD COPY go.mod .
+ONBUILD RUN make deps
+ONBUILD COPY . .
+ONBUILD RUN go build -ldflags "$LDFLAGS"
