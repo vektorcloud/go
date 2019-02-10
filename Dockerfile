@@ -32,6 +32,7 @@ ARG CGO_ENABLED=0
 ARG LDFLAGS="-w -s"
 
 ONBUILD COPY go.mod .
-ONBUILD RUN make deps
+ONBUILD RUN go mod download
 ONBUILD COPY . .
 ONBUILD RUN go build -ldflags "$LDFLAGS"
+ONBUILD RUN CGO_ENABLED=$CGO_ENABLED go build -ldflags "$LDFLAGS"
