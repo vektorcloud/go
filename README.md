@@ -1,6 +1,6 @@
 # go
 
-![circleci][circleci]
+![circleci][https://circleci.com/gh/vektorcloud/go]
 
 [![Docker Repository on Quay](https://quay.io/repository/vektorcloud/go/status "Docker Repository on Quay")](https://quay.io/repository/vektorcloud/go)
 
