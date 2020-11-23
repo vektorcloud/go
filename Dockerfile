@@ -1,19 +1,19 @@
-FROM quay.io/vektorcloud/base:3.11 as base
+FROM quay.io/vektorcloud/base:3.12 as base
 
-ENV GOLANG_VERSION 1.14.3
+ENV GOLANG_VERSION 1.15.5
 ENV GOLANG_SRC_URL https://golang.org/dl/go${GOLANG_VERSION}.src.tar.gz
-ENV GOLANG_SRC_SHA256 93023778d4d1797b7bc6a53e86c3a9b150c923953225f8a48a2d5fabc971af56
+ENV GOLANG_SRC_SHA256 c1076b90cf94b73ebed62a81d802cd84d43d02dea8c07abdc922c57a071c84f1
 
 ENV GOPATH /go
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
-# Include common CVS and Go package deps, including libc headers
-RUN apk add --no-cache curl git mercurial bzr make gcc musl-dev
+# Include common CVS and go package deps
+RUN apk add --no-cache curl git mercurial make gcc musl-dev
 
 RUN set -ex && \
     apk add --no-cache --virtual .build-deps \
                                  bash \
-                                 gcc \
+                                 gnupg \
                                  openssl \
                                  go && \
     export GOROOT_BOOTSTRAP="$(go env GOROOT)" && \
