@@ -1,8 +1,9 @@
-FROM quay.io/vektorcloud/base:3.12 as base
+FROM quay.io/vektorcloud/base:3.13 as base
 
-ENV GOLANG_VERSION 1.15.5
+ENV GOLANG_VERSION 1.16.2
+ENV GOLANG_SRC_SHA256 37ca14287a23cb8ba2ac3f5c3dd8adbc1f7a54b9701a57824bf19a0b271f83ea
+
 ENV GOLANG_SRC_URL https://golang.org/dl/go${GOLANG_VERSION}.src.tar.gz
-ENV GOLANG_SRC_SHA256 c1076b90cf94b73ebed62a81d802cd84d43d02dea8c07abdc922c57a071c84f1
 
 ENV GOPATH /go
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
